@@ -1,0 +1,74 @@
+<?php
+
+class Solution {
+
+    /**
+     * @param String $s
+     * @return Integer
+     */
+    function romanToInt(string $s): int {
+        $romanMap = [
+            'I' => 1,
+            'V' => 5,
+            'X' => 10,
+            'L' => 50,
+            'C' => 100,
+            'D' => 500,
+            'M' => 1000,
+        ];
+
+        $total = 0;
+        $length = strlen($s);
+
+        for ($i = 0; $i < $length; $i++) {
+            $currentVal = $romanMap[$s[$i]];
+
+            // Проверяем, есть ли следующий символ и является ли текущий меньше следующего
+            if ($i + 1 < $length) {
+                $nextVal = $romanMap[$s[$i+1]];
+                if ($currentVal < $nextVal) {
+                    $total += ($nextVal - $currentVal);
+                    $i++; // Пропускаем следующий символ, так как он уже обработан
+                } else {
+                    $total += $currentVal; // Обычное сложение
+                }
+            } else {
+                // Это последний символ, просто добавляем его значение
+                $total += $currentVal;
+            }
+        }
+        return $total;
+    }
+}
+
+// Примеры использования:
+$solution = new Solution();
+
+$input1 = "III";
+echo $input1 . " -> " . $solution->romanToInt($input1) . "\n"; // Ожидаемый результат: 3
+
+$input2 = "LVIII";
+echo $input2 . " -> " . $solution->romanToInt($input2) . "\n"; // Ожидаемый результат: 58
+
+$input3 = "MCMXCIV";
+echo $input3 . " -> " . $solution->romanToInt($input3) . "\n"; // Ожидаемый результат: 1994
+
+$input4 = "IX";
+echo $input4 . " -> " . $solution->romanToInt($input4) . "\n"; // Ожидаемый результат: 9
+
+$input5 = "IV";
+echo $input5 . " -> " . $solution->romanToInt($input5) . "\n"; // Ожидаемый результат: 4
+
+$input6 = "XL";
+echo $input6 . " -> " . $solution->romanToInt($input6) . "\n"; // Ожидаемый результат: 40
+
+$input7 = "XC";
+echo $input7 . " -> " . $solution->romanToInt($input7) . "\n"; // Ожидаемый результат: 90
+
+$input8 = "CD";
+echo $input8 . " -> " . $solution->romanToInt($input8) . "\n"; // Ожидаемый результат: 400
+
+$input9 = "CM";
+echo $input9 . " -> " . $solution->romanToInt($input9) . "\n"; // Ожидаемый результат: 900
+
+?>
