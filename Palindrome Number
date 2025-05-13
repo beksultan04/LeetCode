@@ -1,0 +1,21 @@
+class Solution {
+    /**
+     * @param Integer $x
+     * @return Boolean
+     */
+    function isPalindrome($x) {
+        // Отрицательное число не может быть палиндромом
+        if ($x < 0) {
+            return false;
+        }
+
+        // Преобразуем число в строку и сравниваем с её реверсом
+        $str = strval($x);
+        return $str === strrev($str);
+    }
+}
+
+// Пример использования:
+$solution = new Solution();
+$x = 121;
+echo "Is $x a palindrome? " . ($solution->isPalindrome($x) ? 'true' : 'false');
