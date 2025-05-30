@@ -1,0 +1,26 @@
+class Solution {
+    /**
+     * @param TreeNode $p
+     * @param TreeNode $q
+     * @return Boolean
+     */
+    function isSameTree($p, $q) {
+        // Если оба узла равны null, деревья совпадают на этой ветке
+        if ($p === null && $q === null) {
+            return true;
+        }
+
+        // Если один из узлов null, а другой нет — деревья не совпадают
+        if ($p === null || $q === null) {
+            return false;
+        }
+
+        // Если значения в текущих узлах не равны — деревья не совпадают
+        if ($p->val !== $q->val) {
+            return false;
+        }
+
+        // Рекурсивно проверяем левое и правое поддеревья
+        return $this->isSameTree($p->left, $q->left) && $this->isSameTree($p->right, $q->right);
+    }
+}
