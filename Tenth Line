@@ -1,0 +1,16 @@
+<?php
+$filename = "file.txt";
+$handle = fopen($filename, "r");
+$lineNumber = 0;
+
+if ($handle) {
+    while (($line = fgets($handle)) !== false) {
+        $lineNumber++;
+        if ($lineNumber == 10) {
+            echo $line;
+            break;
+        }
+    }
+    fclose($handle);
+}
+?>
